@@ -1,6 +1,9 @@
 # Partify
 **_A party app for Spotify!_**
 
+
+![](img/title.png)
+
 This idea came to me during my wedding preparations; my wife and I didn't want to spend money on a DJ and thought playing tracks through Spotify would suffice. Which brought me onto the idea that maybe we could turn it into a bit of a fun interactive night and allow people to vote on whether to keep playing the song or skip to the next one.
 
 It took about a month to write up, on and off in my spare time with a colleague who knows more about JavaScript than I do. I'm an Azure Consultant, not a programmer. That being said, I know that both Python and JavaScript could indeed likely be improved upon, but what it is at the moment seems very usable.
@@ -24,7 +27,7 @@ I will keep this fairly brief, but hopefully enough that you can run with it. An
 
 ### Docker
 
-The image for the conatiners are in the `00_dockerfile` folder. Please use your basic Docker skills to create a container out of each of them, tagging them appropriately for use.
+The image for the containers are in the `00_dockerfile` folder. Please use your basic Docker skills to create a container out of each of them, tagging them appropriately for use.
 
 ```bash
 docker build -t pmackpartyapp.azurecr.io/partifyback .
@@ -81,7 +84,7 @@ export SPOTIPY_REDIRECT_URI='http://127.0.0.1:80/'
 python3 prestart.py
 ```
 
-This will run the Python sript and echo results that it's done. Now all that is required is to run `terraform apply` to pull in the cached token and pull the containers from your Azure Container Registry to spin up the application.
+This will run the Python script and echo results that it's done. Now all that is required is to run `terraform apply` to pull in the cached token and pull the containers from your Azure Container Registry to spin up the application.
 
 You will then need to log in using one of the user credentials specified in `users.json` in `02_container` folder. Seeing as though this was a personal use, quick set up, I didn't go for a full blown username/password login; so the usernames are essentially just passwords that allow you to log into Flask. The one prefixed with `admin_` is the admin account which allows you to perform vote overrides and update the vote time count if need be.
 
@@ -100,7 +103,7 @@ To login, just connect to the container DNS url and it should redirect you to th
 ![](img/web-voteClosed.png)
 
 #### Wife Song Override
-This is a bit of a hidden gem. You can find the arists unique IDs and preload them into the Python script, so that whenever these artists are rotated into the current playing song, then NO ONE can skip it (this was a wife request/demand). Also, if you're admin, you will have the `Override` button visible to press upon demand to do this.
+This is a bit of a hidden gem. You can find the artists unique IDs and preload them into the Python script, so that whenever these artists are rotated into the current playing song, then NO ONE can skip it (this was a wife request/demand). Also, if you're admin, you will have the `Override` button visible to press upon demand to do this.
 
 ![](img/web-wifeOverride.png)
 
